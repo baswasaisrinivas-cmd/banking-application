@@ -1,0 +1,52 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container mt-5">
+    <h2 class="mb-4">Dashboard</h2>
+    <p class="text-muted">Welcome to your banking dashboard. Manage your accounts and transactions below.</p>
+    
+    <div class="row">
+        <!-- Accounts Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Accounts</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">View and manage your bank accounts.</p>
+                    <a href="/accounts/list" class="btn btn-primary btn-sm">View Accounts</a>
+                    <a href="/accounts/create" class="btn btn-success btn-sm">Create Account</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Transactions Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Transactions</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Perform deposits, transfers, and view history.</p>
+                    <a href="/transactions/deposit" class="btn btn-info btn-sm">Deposit</a>
+                    <a href="/transactions/transfer" class="btn btn-warning btn-sm">Transfer</a>
+                    <a href="/transactions/history" class="btn btn-secondary btn-sm">History</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr class="my-5">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Quick Stats</h5>
+            <p class="text-muted">Use the navigation above or visit <code>/h2-console</code> to view database details.</p>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

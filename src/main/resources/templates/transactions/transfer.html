@@ -1,0 +1,45 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container mt-5">
+    <h3>Transfer Money</h3>
+    <div th:if="${param.error}" class="alert alert-danger">
+        Error: <span th:text="${param.error}"></span>
+    </div>
+    
+    <form method="post" action="/transactions/transfer" class="mt-4">
+        <div class="mb-3">
+            <label class="form-label">From Account</label>
+            <select name="fromAccountId" class="form-select" required>
+                <option value="">-- Select Account --</option>
+                <option th:each="account : ${accounts}" th:value="${account.id}">
+                    <span th:text="${account.accountNumber}"></span> - <span th:text="${account.accountType}"></span> ($<span th:text="${#numbers.formatDecimal(account.balance, 1, 2)}"></span>)
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">To Account</label>
+            <select name="toAccountId" class="form-select" required>
+                <option value="">-- Select Account --</option>
+                <option th:each="account : ${accounts}" th:value="${account.id}">
+                    <span th:text="${account.accountNumber}"></span> - <span th:text="${account.accountType}"></span>
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Amount</label>
+            <input name="amount" type="number" step="0.01" class="form-control" required min="0.01" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description (optional)</label>
+            <input name="description" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Transfer</button>
+        <a href="/dashboard" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

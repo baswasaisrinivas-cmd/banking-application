@@ -1,0 +1,13 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="text-center">
+    <h1>Welcome to BankingApp</h1>
+    <p class="lead">Simple demo banking application.</p>
+    <a class="btn btn-primary" th:href="@{/register}">Get Started</a>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

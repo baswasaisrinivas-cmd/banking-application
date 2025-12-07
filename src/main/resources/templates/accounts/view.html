@@ -1,0 +1,26 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container mt-5">
+    <h3>Account Details</h3>
+    
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Account Number:</strong> <span th:text="${account.accountNumber}"></span></p>
+            <p><strong>Type:</strong> <span th:text="${account.accountType}"></span></p>
+            <p><strong>Balance:</strong> $<span th:text="${#numbers.formatDecimal(account.balance, 1, 2)}"></span></p>
+            <p><strong>Owner:</strong> <span th:text="${account.owner.username}"></span></p>
+            <p><strong>Created:</strong> <span th:text="${#temporals.format(account.createdAt, 'dd-MMM-yyyy HH:mm')}"></span></p>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <a href="/accounts/list" class="btn btn-secondary">Back to Accounts</a>
+        <a href="/transactions/history" class="btn btn-info">View Transactions</a>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container mt-5">
+    <h3>Transaction History</h3>
+    <div th:if="${param.success}" class="alert alert-success">
+        Transaction completed successfully!
+    </div>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>From Account</th>
+                <th>To Account</th>
+                <th>Description</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="transaction : ${transactions}">
+                <td th:text="${transaction.id}"></td>
+                <td th:text="${transaction.type}"></td>
+                <td>$<span th:text="${#numbers.formatDecimal(transaction.amount, 1, 2)}"></span></td>
+                <td th:text="${transaction.fromAccount != null ? transaction.fromAccount.accountNumber : '-'}"></td>
+                <td th:text="${transaction.toAccount != null ? transaction.toAccount.accountNumber : '-'}"></td>
+                <td th:text="${transaction.description != null ? transaction.description : '-'}"></td>
+                <td th:text="${#temporals.format(transaction.timestamp, 'dd-MMM-yyyy HH:mm')}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <p th:if="${transactions.isEmpty()}" class="text-muted">No transactions found.</p>
+    
+    <div class="mt-4">
+        <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container mt-5">
+    <h3>My Accounts</h3>
+    <div th:if="${param.success}" class="alert alert-success">
+        Account created successfully!
+    </div>
+    
+    <a href="/accounts/create" class="btn btn-success mb-3">Create New Account</a>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Account Number</th>
+                <th>Type</th>
+                <th>Balance</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="account : ${accounts}">
+                <td th:text="${account.accountNumber}"></td>
+                <td th:text="${account.accountType}"></td>
+                <td>$<span th:text="${#numbers.formatDecimal(account.balance, 1, 2)}"></span></td>
+                <td th:text="${#temporals.format(account.createdAt, 'dd-MMM-yyyy')}"></td>
+                <td>
+                    <a th:href="@{/accounts/view(id=${account.id})}" class="btn btn-info btn-sm">View</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p th:if="${accounts.isEmpty()}" class="text-muted">No accounts found.</p>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
